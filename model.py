@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+import joblib
 
 df = pd.read_csv('data/exception_training_data_large.csv')
 X_train, X_test, y_train, y_test = train_test_split(df['Exception'], df['Category'], test_size=0.2, random_state=42)
@@ -38,3 +39,12 @@ evaluate_classifier(y_test, y_pred_rf, "Random Forest")
 evaluate_classifier(y_test, y_pred_dt, "Decision Tree")
 evaluate_classifier(y_test, y_pred_gb, "Gradient Boosting")
 
+# Save models
+rf_classifier_model = 'model/rf_classifier_model.pkl'
+dt_classifier_model = 'model/dt_classifier_model.pkl'
+gb_classifier_model = 'model/gb_classifier_model.pkl'
+vectorizer = 'model/tfidf_vectorizer.pkl'
+joblib.dump(tfidf_vectorizer, vectorizer)
+joblib.dump(rf_classifier, rf_classifier_model)
+joblib.dump(dt_classifier, dt_classifier_model)
+joblib.dump(gb_classifier, gb_classifier_model)
