@@ -1,37 +1,26 @@
 import pandas as pd
 import random
-
-# Sample exception messages
-runtime_exceptions = [
-    "java.lang.NullPointerException: Null value found",
-    "java.lang.IllegalArgumentException: Invalid argument",
-    "java.lang.IndexOutOfBoundsException: Index out of bounds",
-    "java.lang.UnsupportedOperationException: Operation not supported"
-]
+from runtime_exceptions import runtime_exceptions
+from business_exceptions import business_exceptions
 
 business_exceptions = [
-    "com.myapp.BusinessException: Invalid input data",
-    "com.myapp.BusinessException: Payment failed due to insufficient funds",
-    "com.myapp.BusinessException: User not found",
-    "com.myapp.BusinessException: Product out of stock"
+    "InvalidInputException: Invalid user input",
+    "DuplicateRecordException: Record already exists in the database",
+    "InsufficientFundsException: Account balance is too low",
+    "InvalidPermissionException: Insufficient permissions for the operation",
+    "InvalidRequestException: Request parameters are invalid",
+    "ExpiredSessionException: Session has expired",
+    "DataNotFoundException: Required data not found",
+    "AuthenticationException: Failed authentication",
+    "ConfigurationErrorException: Error in system configuration",
+    "TransactionFailedException: Failure in processing transaction"
 ]
 
-data = {
-    'Exception': [],
-    'Category': []
-}
-
-# Generate a dataset with 10,000 samples
-for _ in range(10000):
-    if random.random() < 0.5:
-        data['Exception'].append(random.choice(runtime_exceptions))
-        data['Category'].append('runtime')
-    else:
-        data['Exception'].append(random.choice(business_exceptions))
-        data['Category'].append('business')
+data = []
+for _ in range(100000): 
+    data.append({'Exception': random.choice(runtime_exceptions), 'Category': 'runtime_exception'})
+    data.append({'Exception': random.choice(business_exceptions), 'Category': 'business_exception'})
 
 df = pd.DataFrame(data)
-
-# Save the dataset to a CSV file for training
+df = df.sample(frac=1).reset_index(drop=True)
 df.to_csv('exception_training_data_large.csv', index=False)
-
