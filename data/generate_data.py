@@ -23,4 +23,4 @@ for _ in range(100000):
 
 df = pd.DataFrame(data)
 df = df.sample(frac=1).reset_index(drop=True)
-df.to_csv('exception_training_data_large.csv', index=False)
+df.to_csv('data/exception_training_data_large.csv', index=False)
