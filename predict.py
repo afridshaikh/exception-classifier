@@ -1,6 +1,6 @@
 import joblib
 
-models = ['NaiveBayes', 'SVM', 'XGBoost']
+models = ['NaiveBayes', 'SVM', 'GradientBoosting']
 
 vectorizer_file = 'model/tfidf_vectorizer.pkl'
 tfidf_vectorizer = joblib.load(vectorizer_file)

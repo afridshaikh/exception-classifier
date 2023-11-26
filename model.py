@@ -20,7 +20,7 @@ joblib.dump(tfidf_vectorizer, vectorizer)
 classifiers = {
     'NaiveBayes': MultinomialNB(),
     'SVM': SVC(kernel='linear'),
-    'XGBoost': GradientBoostingClassifier()
+    'GradientBoosting': GradientBoostingClassifier()
 }
 
 def evaluate_classifier(y_true, y_pred, classifier_name):
